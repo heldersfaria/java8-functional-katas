@@ -1,14 +1,10 @@
 package katas;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import model.BoxArt;
-import model.Movie;
-import model.MovieList;
-import util.DataUtil;
+import java.util.Comparator;
+import java.util.function.BinaryOperator;
 
-import java.util.List;
-import java.util.Map;
+import model.Movie;
+import util.DataUtil;
 
 /*
     Goal: Retrieve the largest rating using reduce()
@@ -16,9 +12,16 @@ import java.util.Map;
     Output: Double
 */
 public class Kata5 {
-    public static Double execute() {
-        List<Movie> movies = DataUtil.getMovies();
 
-        return 3.0;
-    }
+	public static void main(String[] args) {
+		System.out.println(execute());
+	}
+
+	public static Double execute() {
+		return DataUtil.getMovies().stream().reduce(BinaryOperator.maxBy(comparator())).orElse(new Movie()).getRating();
+	}
+
+	private static Comparator<Movie> comparator() {
+		return (x, y) -> x.getRating().compareTo(y.getRating());
+	}
 }

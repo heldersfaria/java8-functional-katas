@@ -1,13 +1,18 @@
 package util;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import model.*;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+
+import model.Bookmark;
+import model.BoxArt;
+import model.InterestingMoment;
+import model.Movie;
+import model.MovieList;
 
 public class DataUtil {
     /*
