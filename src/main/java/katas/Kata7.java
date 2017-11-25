@@ -10,6 +10,7 @@ import com.google.common.collect.ImmutableMap;
 
 import model.BoxArt;
 import model.Movie;
+import model.MovieList;
 import util.DataUtil;
 
 /*
@@ -18,21 +19,26 @@ import util.DataUtil;
     Output: List of ImmutableMap.of("id", "5", "title", "Bad Boys", "boxart": "url)
 */
 public class Kata7 {
+
 	public static List<Map> execute() {
 
-		return DataUtil.getMovies().stream().map(
-				entity -> ImmutableMap.of("id", entity.getId(), "title", entity.getTitle(), "boxart",
-						getBoxArt(entity)	))
-				.collect(Collectors.toList());
+		List<MovieList> movieLists = DataUtil.getMovieLists();
+
+		return movieLists.stream().flatMap(movieList -> movieList.getVideos().stream())
+				.map(functionMovieToImmutableMap()).collect(Collectors.toList());
+
 	}
 
-	private static BoxArt getBoxArt(Movie entity) {
-		return entity.getBoxarts().stream()
-				.reduce(BinaryOperator.minBy((x, y) -> x.getUrl().length() - y.getUrl().length())).orElse(new BoxArt());
+	public static Function<Movie, ImmutableMap<String, Object>> functionMovieToImmutableMap() {
+		return movieInternal -> ImmutableMap.of("id", movieInternal.getId(), "title", movieInternal.getTitle(),
+				"boxart",
+				movieInternal.getBoxarts().stream().reduce(getSmallestBoxArt()).map(BoxArt::getUrl).orElse(""));
 	}
-	
-//	private static Function<Movie, BoxArt>  getBoxArt() {
-//		return entity -> entity.getBoxarts().stream()
-//				.reduce(BinaryOperator.minBy((x, y) -> x.getUrl().length() - y.getUrl().length())).orElse(new BoxArt());
-//	}
+
+	public static BinaryOperator<BoxArt> getSmallestBoxArt() {
+		return (boxart1, boxart2) -> boxart1.getHeight() * boxart1.getWidth() < boxart2.getHeight() * boxart2.getWidth()
+				? boxart1
+				: boxart2;
+	}
+
 }
