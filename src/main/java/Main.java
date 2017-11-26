@@ -1,6 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
 import katas.Kata1;
+import katas.Kata10;
 import katas.Kata2;
 import katas.Kata3;
 import katas.Kata4;
@@ -38,9 +39,9 @@ public class Main {
 
         assertEquals(Kata9.execute().size(), 4);
         System.out.println("Kata 9 solved!");
-//
-//        assertEquals(Kata10.execute().size(), 2);
-//        System.out.println("Kata 10 solved!");
+
+        assertEquals(Kata10.execute().size(), 2);
+        System.out.println("Kata 10 solved!");
 //
 //        assertEquals(Kata11.execute().size(), 2);
 //        System.out.println("Kata 11 solved!");
