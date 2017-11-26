@@ -8,6 +8,7 @@ import katas.Kata5;
 import katas.Kata6;
 import katas.Kata7;
 import katas.Kata8;
+import katas.Kata9;
 
 public class Main {
     public static void main(String[] args) {
@@ -34,9 +35,9 @@ public class Main {
 
         assertEquals(Kata8.execute().size(), 3);
         System.out.println("Kata 8 solved!");
-//
-//        assertEquals(Kata9.execute().size(), 4);
-//        System.out.println("Kata 9 solved!");
+
+        assertEquals(Kata9.execute().size(), 4);
+        System.out.println("Kata 9 solved!");
 //
 //        assertEquals(Kata10.execute().size(), 2);
 //        System.out.println("Kata 10 solved!");
